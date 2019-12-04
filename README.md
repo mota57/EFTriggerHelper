@@ -86,7 +86,7 @@ Define a class that implements the following interfaces.
         }
 
       
-        public void AfterUpdate(DbContext context,  IEnumerable<PersonTbl> entities) => Console.WriteLine("after update executed);
+        public void AfterUpdate(DbContext context,  IEnumerable<PersonTbl> entities) => Console.WriteLine("after update executed");
       
         public void BeforeDelete(DbContext context,  IEnumerable<PersonTbl> entities) =>  Console.WriteLine("before delete executed");
 
