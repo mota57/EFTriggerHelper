@@ -16,7 +16,7 @@ Download the project and add the reference of EFTriggerHelper to your project.
 
 ## Usage
 
-In your db context add the field/property `DbContextTriggerHelper` and override the SaveChanges like so (copy and paste in your db context the savechanges)
+- copy and paste in your db context the override of  savechanges  in the following example.
 
 ```cs
     public class DummyContext : DbContext
@@ -94,11 +94,21 @@ Define a class that implements the following interfaces.
     }
 
 ```
+- make sure to pass the assymbly of only one concrete trigger class. Organize your trigger classes in one assembly.
 
-
-Execute triggers
+```cs
+        private DbContextTriggerHelper helper =  helper = new DbContextTriggerHelper(typeof(PersonTrigger).Assembly);
 ```
-YourDbContext.SaveChanges() or YourDbContext.SaveChangesAsync() 
+
+Execute triggers by calling SaveChanges or SaveChangesAsync() in the derived DbContext 
+```.cs
+public class PersonController : Controller
+
+public IActionResult CreatePerson(PersonTbl person)
+{ 
+    yourDbContext.Person.Add(person);
+    YourDbContext.SaveChanges() // or await yourDbContext.SaveChangesAsync() 
+}
 ```
 
 ## Support
