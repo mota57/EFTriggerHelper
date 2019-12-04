@@ -1,5 +1,0 @@
-C:\Users\hmota\Documents\RESOURCES\Projects\PointOfSales\EFTriggerHelper\bin\Debug\netcoreapp2.2\EFTriggerHelper.deps.json
-C:\Users\hmota\Documents\RESOURCES\Projects\PointOfSales\EFTriggerHelper\bin\Debug\netcoreapp2.2\EFTriggerHelper.dll
-C:\Users\hmota\Documents\RESOURCES\Projects\PointOfSales\EFTriggerHelper\obj\Debug\netcoreapp2.2\EFTriggerHelper.csproj.CoreCompileInputs.cache
-C:\Users\hmota\Documents\RESOURCES\Projects\PointOfSales\EFTriggerHelper\obj\Debug\netcoreapp2.2\EFTriggerHelper.AssemblyInfoInputs.cache
-C:\Users\hmota\Documents\RESOURCES\Projects\PointOfSales\EFTriggerHelper\obj\Debug\netcoreapp2.2\EFTriggerHelper.AssemblyInfo.cs

@@ -5,11 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace EFTriggerHelper
 {
 
-    public class DbContextTriggerHelper
+    public partial class DbContextTriggerHelper
     {
         private Assembly assembly;
 
@@ -69,7 +70,6 @@ namespace EFTriggerHelper
         }
 
 
-
         public void ExecuteBeforeTriggerMethod(DbContext context, Type typeInstanceHandler, string methodName, EntityState entityState)
         {
             var typeList = GetTypesWithInferfaceOfType(typeInstanceHandler);
@@ -79,7 +79,7 @@ namespace EFTriggerHelper
                 var entries = GetEntries(context, typeMeta.EntityTypeArg, entityState);
                 if (entries.Count() == 0) continue;
 
-                 RecordInCachedEntries(typeMeta, entries, entityState);
+                RecordInCachedEntries(typeMeta, entries, entityState);
 
                 object instance = assembly.CreateInstance(type.FullName, false,
                      BindingFlags.ExactBinding,
@@ -121,10 +121,11 @@ namespace EFTriggerHelper
                 foreach (var entry in entries)
                     entities.Add(entry);
 
-                 if (entities.Count == 0) continue;
-                 info.Invoke(instance, new object[] { context, entities });
+                if (entities.Count == 0) continue;
+                info.Invoke(instance, new object[] { context, entities });
             }
         }
+
 
 
         private void RecordInCachedEntries(MetaGenericType typeMeta, IEnumerable<EntityEntry> entries, EntityState entityState)
