@@ -11,7 +11,7 @@ This is a simple trigger implementation in efcore that you can create for your e
 ## Installation
 
 ```sh
-Download the project and add the reference of DbContextTriggerHelper to your project.
+Download the project and add the reference of EFTriggerHelper to your project.
 ```
 
 ## Usage
