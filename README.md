@@ -80,7 +80,7 @@ Define a class that implements the following interfaces.
 
         public void BeforeUpdate(DbContext context,  IEnumerable<PersonTbl> entities)
         {
-            Console.WriteLine("before update executed);
+            Console.WriteLine("before update executed");
             entities.First().ModifiedDate = DateTime.Now;
             entities.First().ModifiyBy = "TEST";
         }
