@@ -15,13 +15,13 @@ namespace EFTriggerHelper
         private Assembly assembly;
 
 
-        public Dictionary<Type, HashSet<object>> TempEntriesAdded =
+        private Dictionary<Type, HashSet<object>> TempEntriesAdded =
                 new Dictionary<Type, HashSet<object>>();
 
-        public Dictionary<Type, HashSet<object>> TempEntriesModified =
+        private Dictionary<Type, HashSet<object>> TempEntriesModified =
              new Dictionary<Type, HashSet<object>>();
 
-        public Dictionary<Type, HashSet<object>> TempEntriesDeleted =
+        private Dictionary<Type, HashSet<object>> TempEntriesDeleted =
           new Dictionary<Type, HashSet<object>>();
 
         public DbContextTriggerHelper(Assembly assembly)
@@ -30,47 +30,47 @@ namespace EFTriggerHelper
         }
 
 
-        public void BeforeCreate(DbContext context)
+        protected internal void BeforeCreate(DbContext context)
         {
             var methodName = nameof(BeforeCreate);
             ExecuteBeforeTriggerMethod(context, typeof(IBeforeCreate<>), methodName, EntityState.Added);
         }
-      
 
-        public void BeforeUpdate(DbContext context)
+
+        protected internal void BeforeUpdate(DbContext context)
         {
             var methodName = nameof(BeforeUpdate);
             ExecuteBeforeTriggerMethod(context, (typeof(IBeforeUpdate<>)), methodName, EntityState.Modified);
         }
 
 
-        public void BeforeDelete(DbContext context)
+        protected internal void BeforeDelete(DbContext context)
         {
             var methodName = nameof(BeforeDelete);
             ExecuteBeforeTriggerMethod(context, (typeof(IBeforeDelete<>)), methodName, EntityState.Deleted);
         }
 
 
-        public void AfterCreate(DbContext context)
+        protected internal void AfterCreate(DbContext context)
         {
             var methodName = nameof(AfterCreate);
             ExecuteAfterTriggerMethod(context, typeof(IAfterCreate<>), methodName, TempEntriesAdded);
         }
 
-        public void AfterUpdate(DbContext context)
+        protected internal void AfterUpdate(DbContext context)
         {
             var methodName = nameof(AfterUpdate);
             ExecuteAfterTriggerMethod(context, typeof(IAfterUpdate<>), methodName, TempEntriesModified);
         }
 
-        public void AfterDelete(DbContext context)
+        protected internal void AfterDelete(DbContext context)
         {
             var methodName = nameof(AfterDelete);
             ExecuteAfterTriggerMethod(context, typeof(IAfterDelete<>), methodName, TempEntriesDeleted);
         }
 
 
-        public void ExecuteBeforeTriggerMethod(DbContext context, Type typeInstanceHandler, string methodName, EntityState entityState)
+        protected internal void ExecuteBeforeTriggerMethod(DbContext context, Type typeInstanceHandler, string methodName, EntityState entityState)
         {
             var typeList = GetTypesWithInferfaceOfType(typeInstanceHandler);
             foreach (var typeMeta in typeList)
@@ -97,7 +97,7 @@ namespace EFTriggerHelper
         }
 
 
-        public void ExecuteAfterTriggerMethod(DbContext context, Type typeInstanceHandler, string methodName, Dictionary<Type, HashSet<object>> tempTentries)
+        protected internal void ExecuteAfterTriggerMethod(DbContext context, Type typeInstanceHandler, string methodName, Dictionary<Type, HashSet<object>> tempTentries)
         {
             var typeList = GetTypesWithInferfaceOfType(typeInstanceHandler);
             foreach (var typeMeta in typeList)

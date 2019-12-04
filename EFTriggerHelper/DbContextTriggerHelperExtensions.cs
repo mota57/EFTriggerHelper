@@ -7,7 +7,7 @@ namespace EFTriggerHelper.Extensions
 
     public static class DbContextTriggerHelperExtensions
     {
-        public static int SaveChangesHandler(this DbContext ctx, Func<int> handler, DbContextTriggerHelper helper)
+        public static int EFTriggerHelperSaveChanges(this DbContext ctx, Func<int> handler, DbContextTriggerHelper helper)
         {
             helper.BeforeCreate(ctx);
             helper.BeforeUpdate(ctx);
@@ -20,7 +20,7 @@ namespace EFTriggerHelper.Extensions
         }
 
 
-        public static async Task<int> SaveChangesHandlerAsync(this DbContext ctx, Func<int> handler, DbContextTriggerHelper helper)
+        public static async Task<int> EFTriggerHelperSaveChangesAsync(this DbContext ctx, Func<Task<int>> handler, DbContextTriggerHelper helper)
         {
             int result = 0;
             await Task.Run(async () =>
@@ -28,8 +28,8 @@ namespace EFTriggerHelper.Extensions
                 await helper.BeforeCreateAsync(ctx);
                 await helper.BeforeUpdateAsync(ctx);
                 await helper.BeforeDeleteAsync(ctx);
-            }).ContinueWith((action) => {
-                result = handler();
+            }).ContinueWith(async (action) => {
+                result = await handler();
             }).ContinueWith(async (action) =>
             {
                 await helper.AfterCreateAsync(ctx);

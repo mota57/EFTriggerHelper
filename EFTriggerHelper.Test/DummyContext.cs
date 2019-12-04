@@ -1,6 +1,8 @@
 ﻿using EFTriggerHelper.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EFTriggerHelper.Test
 {
@@ -22,26 +24,26 @@ namespace EFTriggerHelper.Test
         public override int SaveChanges()
         {
             Func<int> handler = ()  => base.SaveChanges();
-            return this.SaveChangesHandler(handler,  helper);
+            return this.EFTriggerHelperSaveChanges(handler,  helper);
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             Func<int> handler = () => base.SaveChanges(acceptAllChangesOnSuccess);
-            return this.SaveChangesHandler(handler, helper);
+            return this.EFTriggerHelperSaveChanges(handler, helper);
         }
 
-        //public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    await helper.BeforeCreateAsync(this);
-        //    return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-        //}
+        public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            Func<Task<int>> handler =  async () => await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            return await this.EFTriggerHelperSaveChangesAsync(handler, helper);
+        }
 
-        //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    await helper.BeforeCreateAsync(this);
-        //    return await base.SaveChangesAsync(cancellationToken);
-        //}
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            Func<Task<int>> handler =  async () => await base.SaveChangesAsync(cancellationToken);
+            return await this.EFTriggerHelperSaveChangesAsync(handler, helper);
+        }
 
     }
 }

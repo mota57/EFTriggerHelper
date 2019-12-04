@@ -10,41 +10,44 @@ namespace EFTriggerHelper
 {
     public partial class DbContextTriggerHelper
     {
-
-        public async Task BeforeCreateAsync(DbContext context)
+        protected internal async Task BeforeCreateAsync(DbContext context)
         {
             var methodName = nameof(BeforeCreateAsync);
             await ExecuteBeforeTriggerMethodAsync(context, typeof(IBeforeCreateAsync<>), methodName, EntityState.Added);
         }
 
 
-        public async Task BeforeUpdateAsync(DbContext context)
+        protected internal async Task BeforeUpdateAsync(DbContext context)
         {
             var methodName = nameof(BeforeUpdateAsync);
             await ExecuteBeforeTriggerMethodAsync(context, (typeof(IBeforeUpdateAsync<>)), methodName, EntityState.Modified);
         }
 
 
-        public async Task BeforeDeleteAsync(DbContext context)
+        protected internal async Task BeforeDeleteAsync(DbContext context)
         {
             var methodName = nameof(BeforeDeleteAsync);
             await ExecuteBeforeTriggerMethodAsync(context, (typeof(IBeforeDeleteAsync<>)), methodName, EntityState.Deleted);
         }
 
 
-        public async Task AfterCreateAsync(DbContext context)
+
+
+
+
+        protected internal async Task AfterCreateAsync(DbContext context)
         {
             var methodName = nameof(AfterCreateAsync);
             await ExecuteAfterTriggerMethodAsync(context, typeof(IAfterCreateAsync<>), methodName, TempEntriesAdded);
         }
 
-        public async Task AfterUpdateAsync(DbContext context)
+        protected internal async Task AfterUpdateAsync(DbContext context)
         {
             var methodName = nameof(AfterUpdateAsync);
             await ExecuteAfterTriggerMethodAsync(context, typeof(IAfterUpdateAsync<>), methodName, TempEntriesModified);
         }
 
-        public async Task AfterDeleteAsync(DbContext context)
+        protected internal async Task AfterDeleteAsync(DbContext context)
         {
             var methodName = nameof(AfterDeleteAsync);
             await ExecuteAfterTriggerMethodAsync(context, typeof(IAfterDeleteAsync<>), methodName, TempEntriesDeleted);
@@ -52,7 +55,7 @@ namespace EFTriggerHelper
 
 
 
-        public async Task ExecuteBeforeTriggerMethodAsync(DbContext context, Type typeInstanceHandler, string methodName, EntityState entityState)
+        protected async Task ExecuteBeforeTriggerMethodAsync(DbContext context, Type typeInstanceHandler, string methodName, EntityState entityState)
         {
             var typeList = GetTypesWithInferfaceOfType(typeInstanceHandler);
             foreach (var typeMeta in typeList)
@@ -80,7 +83,7 @@ namespace EFTriggerHelper
         }
 
 
-        public async Task ExecuteAfterTriggerMethodAsync(DbContext context, Type typeInstanceHandler, string methodName, Dictionary<Type, HashSet<object>> tempTentries)
+        protected async Task ExecuteAfterTriggerMethodAsync(DbContext context, Type typeInstanceHandler, string methodName, Dictionary<Type, HashSet<object>> tempTentries)
         {
             var typeList = GetTypesWithInferfaceOfType(typeInstanceHandler);
             foreach (var typeMeta in typeList)
