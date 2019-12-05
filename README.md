@@ -121,7 +121,7 @@ Please [open an issue](https://github.com/mota57/EFTriggerHelper/issues/new) for
 
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) [2019] [Hector Mota]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
