@@ -55,8 +55,7 @@ Download the project and add the reference of EFTriggerHelper to your project.
     }
 
 ```
-
-Define a class that implements the following interfaces.
+- Define a class that implements the following interfaces.
 ```cs
  public class PersonTrigger :
             IBeforeCreateAsync<PersonTbl>,
@@ -94,7 +93,8 @@ Define a class that implements the following interfaces.
     }
 
 ```
-- make sure to pass the assymbly of only one concrete trigger class. Organize your trigger classes in one assembly.
+- Make sure to pass as parameter the assembly of one concrete trigger class. 
+- Make sure to organize your trigger classes in one assembly.
 
 ```cs
         private DbContextTriggerHelper helper =  helper = new DbContextTriggerHelper(typeof(PersonTrigger).Assembly);
