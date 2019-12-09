@@ -56,7 +56,7 @@ Download the project and add the reference of EFTriggerHelper to your project.
     }
 
 ```
-- Define a class that implements the following interfaces.
+- Define a class that implements the following interfaces. (Every sync interface has a async interface. The IBeforeCreate is sync and the async interface is IBeforeCreateAsync, it will be the same for the rest of the interfaces)
 ```cs
  public class PersonTrigger :
             IBeforeCreateAsync<PersonTbl>,
