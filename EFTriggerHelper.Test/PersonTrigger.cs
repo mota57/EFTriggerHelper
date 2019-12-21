@@ -9,18 +9,10 @@ namespace EFTriggerHelper.Test
     /// <summary>
     /// create, update, delete
     /// </summary>
-    public class PersonTrigger :
-            IBeforeCreate<PersonTbl>,
-            IAfterCreate<PersonTbl>,
-            IBeforeUpdate<PersonTbl>,
-            IAfterUpdate<PersonTbl>,
-            IBeforeDelete<PersonTbl>,
-            IAfterDelete<PersonTbl>
+    public class PersonTrigger : IBeforeCreate<PersonTbl>, IAfterCreate<PersonTbl>, IBeforeUpdate<PersonTbl>, 
+                                 IAfterUpdate<PersonTbl>, IBeforeDelete<PersonTbl>, IAfterDelete<PersonTbl>
     {
-        public static PersonTbl EntityAfterUpdate = null;
-        public static PersonTbl EntityBeforeDelete = null;
-        public static PersonTbl EntityAfterDelete = null;
-
+        
         public void AfterCreate(DbContext context, IEnumerable<PersonTbl> entities)
         {
             var ctx = (context as DummyContext);
@@ -56,6 +48,11 @@ namespace EFTriggerHelper.Test
         {
             EntityAfterDelete = entities.First();
         }
+
+        public static PersonTbl EntityAfterUpdate = null;
+        public static PersonTbl EntityBeforeDelete = null;
+        public static PersonTbl EntityAfterDelete = null;
+
     }
 
 }
