@@ -25,7 +25,7 @@ dotnet add package EFTriggerHelper --version 1.0.0
         public DbSet<PersonTbl> Person { get; set; }
        
 
-        private DbContextTriggerHelper helper =  helper = new DbContextTriggerHelper(typeof(PersonTrigger).Assembly);
+        private DbContextTriggerHelper helper =   new DbContextTriggerHelper(typeof(PersonTrigger).Assembly);
 
        
         public override int SaveChanges()
